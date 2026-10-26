@@ -287,3 +287,4 @@ main:focus-visible { outline: none; }
 
 .toast { visibility: hidden; }
 .toast.show { visibility: visible; }
+input[type=checkbox] { accent-color: var(--yellow); }
