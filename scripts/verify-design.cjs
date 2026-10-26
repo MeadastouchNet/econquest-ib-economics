@@ -23,7 +23,7 @@ const server = http.createServer((req, res) => {
     await page.goto(`http://127.0.0.1:${server.address().port}/`);
     await page.locator('#app h1').waitFor();
     const sections = await page.evaluate(async () => (await import('/js/content/units.js')).SECTIONS.map(s => s.id));
-    const routes = ['/', '/u/1', '/u/2', '/u/3', '/u/4', '/settings', '/stats', '/formulas', '/review', '/boss/2',
+    const routes = ['/assessment', '/assessment/diagrams', '/assessment/diagrams/tax', '/assessment/papers/p3', '/assessment/cases', '/assessment/ia', '/assessment/coverage', '/', '/u/1', '/u/2', '/u/3', '/u/4', '/settings', '/stats', '/formulas', '/review', '/boss/2',
       ...sections.flatMap(id => ['hook', 'learn', 'lab', 'worked', 'quiz', 'explain'].map(step => `/s/${id}/${step}`))];
     for (const theme of ['light', 'dark']) {
       for (const width of [1280, 375]) {

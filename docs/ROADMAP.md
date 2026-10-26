@@ -38,6 +38,12 @@
 
 No planned units or glossary destinations remain. See `SYLLABUS.md` for the mapping. Examples and data are fictional. Research into actual countries and current events, including comparing SDG progress, remains an explicit learner task alongside these lessons.
 
+## Assessment improvements — 26 October 2026
+
+The new Assessment studio adds 26 diagram construction tasks (12 with comparison models), three timed papers, 11 checked numerical parts, an IA planner, real economic evidence and an initial objective evidence register. Lesson percentages are now labelled quiz recall. An appended HL export-revenue question raises the quiz total to 337; shared inequality-policy teaching is more explicit.
+
+See `ASSESSMENT-REVIEW.md` for findings, validation and remaining gaps. The register is not a complete official sub-point audit. Self-review does not establish independently assessed mastery.
+
 ## Maintenance
 
 After a week or two, inspect local Usage stats for return visits, older-question accuracy, difficult questions and lesson ratings. Update examples and explanations where needed. Keep published question IDs stable.
@@ -49,3 +55,5 @@ After a week or two, inspect local Usage stats for return visits, older-question
 - Full course browser check: 46 lessons, 336 correct answers, 49 rendered labs, glossary, formulas and phone layouts passed.
 - Design check: 286 routes in light/dark at 1280px and 375px, plus automatic/manual themes, yellow-button contrast and quiz marking.
 - Content validation passed with existing question-length and glossary-alias warnings.
+
+Publishing integration: preserved the newer assessment studio and diagram annotation improvements, applied the same palette and number font to its editor, and retained compatibility with saved drawings and exported SVGs. Rechecked the merged course and assessment flows before publication.

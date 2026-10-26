@@ -2,9 +2,13 @@
 
 All four units of IB Economics HL: introduction, microeconomics, macroeconomics and the global economy. Short lessons use the fictional HarbourFest and Harbourland cases, with interactive labs, worked examples, quizzes, glossary helpers, read-aloud, spaced review, XP and local usage statistics.
 
-46 lessons, 336 quiz questions, 49 activities and 300 glossary entries. The remaining chapters add 40 lessons, 288 questions and 43 activities.
+46 lessons, 337 quiz questions, 49 activities and 300 glossary entries. The remaining chapters add 40 lessons, 289 questions and 43 activities.
 
 Live app: https://meadastouchnet.github.io/econquest-ib-economics/
+
+## Assessment studio
+
+Open **Assessment studio** from the home page, lesson links or footer: 26 diagram construction tasks (12 comparison models), timed Paper 1/2/HL Paper 3 exercises with 11 checked numerical parts, IA preparation, sourced cases and an initial skills evidence tracker. Written feedback is formative self-review, not automated IB marking. Quiz recall and independent assessment are distinguished. See [the review response](docs/ASSESSMENT-REVIEW.md) for scope, checks and remaining gaps.
 
 ## Run locally
 
@@ -27,7 +31,9 @@ All teaching text and questions are original. Festival data are fictional. This 
 
 ## Verification
 
-Run `node C:/Users/jespe/.codex/skills/ib-learning-app/scripts/validate_content.mjs .` for content structure and term destinations. With the local server running on port 8873, `node scripts/verify-course.cjs` checks lesson routes, all quiz answers, generic lab challenges, curve-shifting challenges, glossary helpers and phone layouts. The browser script requires Playwright and Edge; adjust its local Playwright import for another machine.
+Run `node C:/Users/jespe/.codex/skills/ib-learning-app/scripts/validate_content.mjs .` for content structure and term destinations. With the local server running on port 8877, `node scripts/verify-course.cjs` checks lesson routes, all quiz answers, generic lab challenges, curve-shifting challenges, glossary helpers and phone layouts. The browser script requires Playwright and Edge; adjust its local Playwright import for another machine.
+
+Run `node scripts/verify-assessment.cjs` for the studio checks against port 8877.
 
 ## Visual design
 

@@ -8,6 +8,7 @@ import { UNITS, BUILT, SECTIONS, findSection, findUnit } from './content/units.j
 import { typeset, fitFormulas } from './tex.js';
 import { linkTerms } from './terms.js';
 import { APP } from './config.js';
+import { assessmentView, assessmentLinks } from './assessment.js';
 
 const STEPS = [
   { key: 'hook', icon: 'hand', label: 'Hook' },
@@ -48,6 +49,7 @@ function route() {
   else if (view === 'formulas') formulasView(findUnit(a)?.sections ? findUnit(a) : null);
   else if (view === 'stats' || view === 'parent') statsView();
   else if (view === 'settings') settingsView();
+  else if (view === 'assessment') assessmentView(app, a, b);
   else homeView();
   renderStats();
   app.focus({ preventScroll: true });
@@ -88,7 +90,8 @@ function homeView() {
   const quick = h('div', { class: 'row', style: 'margin-bottom:20px' },
     h('a', { class: 'btn ghost', href: '#/review' }, icon('rotate-ccw'), `Review (${due} due)`),
     h('a', { class: 'btn ghost', href: '#/boss' }, icon('swords'), 'Boss Battle'),
-    h('a', { class: 'btn ghost', href: '#/formulas' }, icon('sigma'), 'Formulas'));
+    h('a', { class: 'btn ghost', href: '#/formulas' }, icon('sigma'), 'Formulas'),
+    h('a', { class: 'btn ghost', href: '#/assessment' }, icon('clipboard-list'), 'Assessment studio'));
 
   const units = h('section', {}, h('h2', {}, 'Units'), h('div', { class: 'grid' }, UNITS.map(unitCard)));
   app.replaceChildren(hero, quick, units);
@@ -105,7 +108,7 @@ function unitCard(u) {
   return h('a', { class: 'tile', href: `#/u/${u.id}` },
     h('div', { class: 'num' }, h('span', { class: 'badge' }, u.emoji), `Unit ${u.id}`), h('h3', {}, u.title),
     h('div', { class: 'bar' }, h('span', { style: `width:${m * 100}%` })),
-    h('div', { class: 'muted small', style: 'margin-top:6px' }, `${done}/${u.sections.length} topics done · mastery ${Math.round(m * 100)}%`));
+    h('div', { class: 'muted small', style: 'margin-top:6px' }, `${done}/${u.sections.length} topics done · quiz recall ${Math.round(m * 100)}%`));
 }
 
 const hlTag = t => t.hl === true ? h('span', { class: 'tag' }, 'HL only') : t.hl ? h('span', { class: 'tag' }, 'part HL') : null;
@@ -127,7 +130,7 @@ function unitView(u) {
       h('div', { class: 'num' }, h('span', { class: 'badge' }, s.emoji), s.id, hlTag(s)),
       h('h3', {}, s.title),
       h('div', { class: 'bar' }, h('span', { style: `width:${m * 100}%` })),
-      h('div', { class: 'muted small', style: 'margin-top:6px' }, sec.done ? `Done · mastery ${Math.round(m * 100)}% · tap to practise` : Object.keys(sec.steps).length ? 'In progress · tap to continue' : `${s.minutes} min`));
+      h('div', { class: 'muted small', style: 'margin-top:6px' }, sec.done ? `Done · quiz recall ${Math.round(m * 100)}% · tap to practise` : Object.keys(sec.steps).length ? 'In progress · tap to continue' : `${s.minutes} min`));
   });
   app.replaceChildren(...head, h('p', { class: 'muted' }, u.blurb),
     h('div', { class: 'row', style: 'margin-bottom:16px' },
@@ -160,7 +163,7 @@ function sectionView(s, stepKey, startCard) {
     h('div', { class: 'row small' }, h('a', { href: `#/u/${s.unit}`, class: 'muted' }, `← Unit ${s.unit}`),
       prog.done ? h('a', { href: `#/s/${s.id}`, class: 'muted' }, 'Topic overview') : null),
     h('h1', { style: 'margin-top:6px' }, `${s.id} ${s.title}`, s.hl === true ? h('span', { class: 'tag' }, 'HL only') : null),
-    stepper);
+    assessmentLinks(s.id), stepper);
   const body = h('div');
   app.replaceChildren(head, body);
 
@@ -305,11 +308,12 @@ function sectionOverview(s) {
   app.replaceChildren(
     h('a', { href: `#/u/${s.unit}`, class: 'muted small' }, `← Unit ${s.unit}`),
     h('h1', { style: 'margin-top:6px' }, `${s.id} ${s.title}`),
+    assessmentLinks(s.id),
     h('div', { class: 'card hero' },
-      h('h2', {}, `Lesson done · mastery ${Math.round(m * 100)}%`),
+      h('h2', {}, `Lesson done · quiz recall ${Math.round(m * 100)}%`),
       h('div', { class: 'bar', style: 'margin:8px 0 12px' }, h('span', { style: `width:${m * 100}%` })),
-      h('p', {}, 'Finishing the lesson is step one. Mastery shows how well these ',
-        h('b', {}, `${ids.length} questions`), ' are stored in your long-term memory. It grows each time you get one right in ',
+      h('p', {}, 'Finishing the lesson is step one. Quiz recall estimates how well these ',
+        h('b', {}, `${ids.length} questions`), ' are recalled across spaced reviews. It does not measure diagram, writing or examination readiness. It grows each time you get one right in ',
         h('b', {}, 'Review'), ', which brings them back after 1, 3, 7 and 16 days. Spacing them out is what makes them stick.'),
       h('p', { class: 'muted' }, `${strong}/${ids.length} questions locked in so far. `,
         next ? `Next review for this topic: ${store.relDay(next)}.` : ''),
@@ -486,8 +490,8 @@ function statsView() {
       kpi(bossBests.length ? bossBests.map(([, b]) => `${b.score}/15`).join(' · ') : '–', bossBests.length ? `Boss best (${bossBests.map(([u]) => u === 'all' ? 'all units' : `Unit ${u}`).join(' · ')})` : 'Boss best')),
     h('div', { class: 'card' }, h('h2', {}, 'Minutes per day (last 14 days)'), chart),
     h('div', { class: 'card' }, h('h2', {}, 'Sections'), h('div', { class: 'table-wrap' }, h('table', { class: 'fin' },
-      h('tr', {}, h('th', {}, 'Section'), h('th', {}, 'Done'), h('th', {}, '1st-try'), h('th', {}, 'Mastery'), h('th', {}, 'Rating')), rows)),
-      h('p', { class: 'muted small', style: 'margin-top:8px' }, '1st-try = quiz accuracy on first attempt. Mastery = how far the questions have moved up the spaced-review boxes (100% = remembered on several spaced reviews).')),
+      h('tr', {}, h('th', {}, 'Section'), h('th', {}, 'Done'), h('th', {}, '1st-try'), h('th', {}, 'Quiz recall'), h('th', {}, 'Rating')), rows)),
+      h('p', { class: 'muted small', style: 'margin-top:8px' }, '1st-try = quiz accuracy on first attempt. Quiz recall = how far the questions have moved up the spaced-review boxes (100% = remembered on several spaced reviews).')),
     h('div', { class: 'card' }, h('h2', {}, 'Most-missed questions'),
       wrongs.length ? h('ol', {}, wrongs.map(([id, c]) => h('li', { html: `${questionIndex.get(id).q.q} <span class="muted small">(${c.wrong}× wrong, ${c.right}× right)</span>` })))
         : h('p', { class: 'muted' }, 'None yet.')),
