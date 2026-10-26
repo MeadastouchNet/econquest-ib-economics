@@ -25,11 +25,11 @@ export function diagramModel(id) {
   const ys=production?20+shift+0.6*qm:90+shift-0.6*qm;
   return axes('Quantity / period','Marginal costs / benefits',[
    D,S,social,curve([[qo,yo],[qm,ym],[qm,ys]],'#ed668c','area'),projection(qm,ym),projection(qo,yo)
-  ],[label(production?77:82,production?25:30,production?'MPB = MSB':'MPB'),label(production?72:75,production?65:80,production?'MPC':'MPC = MSC'),label(production?77:82,production?20+shift+0.6*80:negative?8:56,production?'MSC':'MSB'),label(qm-3,3,'Qm'),label(qo-4,10,'Qopt'),label(1,104,negative?'Overproduction; shaded welfare loss':'Underproduction; shaded welfare loss')]);
+  ],[label(production?77:82,production?25:30,production?'MPB = MSB':'MPB'),label(production?72:75,production?65:80,production?'MPC':'MPC = MSC'),label(production?77:82,production?20+shift+0.6*80:negative?8:56,production?'MSC':'MSB'),label(qm-3,3,'Qm'),label(qo-4,10,'Qopt')]);
  }
  if(id==='ped')return axes('Quantity / period','Price',[
   curve([[0,100],[100,0]],'#9a7aff'),projection(20,80),projection(50,50),projection(80,20)
- ],[label(0,82,'P80; Q20; |PED| = 4'),label(0,52,'P50; Q50; |PED| = 1'),label(0,22,'P20; Q80; |PED| = 0.25'),label(82,8,'D')]);
+ ],[label(22,83,'P80; Q20; |PED| = 4'),label(52,53,'P50; Q50; |PED| = 1'),label(2,24,'P20; Q80; |PED| = 0.25'),label(82,8,'D')]);
  if(id==='jcurve')return axes('Time after depreciation','Trade balance (surplus + / deficit −)',[
   curve([[0,50],[100,50]],'#9c9fb9'),curve([[5,35],[20,25],[30,15],[40,12],[50,20],[60,36],[70,50],[85,68],[97,72]],'#9a7aff')
  ],[label(0,53,'Zero'),label(8,8,'Initial deterioration'),label(57,80,'Conditional recovery'),label(0,92,'Schematic: no guaranteed time scale')]);
