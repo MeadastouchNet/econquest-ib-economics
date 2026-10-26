@@ -38,6 +38,6 @@ Scope checked on 26 October 2026 against the IB Economics guide (first assessmen
 | 4.9 | Economic, geographic, institutional and social barriers to growth/development |
 | 4.10 | Trade strategies, diversification, market/intervention approaches, FDI, aid, debt relief and institutions |
 
-HL-only lessons have `hl: true`; shared topics with extensions use `hl: 'part'` and visible HL labels in teaching text. All scenarios and numerical datasets are original and fictional. They teach mechanisms; they do not stand in for researched contemporary case studies.
+HL-only lessons have `hl: true`; shared topics with extensions use `hl: 'part'` and visible HL labels in teaching text. The original lesson scenarios and numerical datasets are fictional. They teach mechanisms; they do not stand in for researched contemporary case studies.
 
-Sources and links are in README.md. These lessons support practice and review alongside classroom teaching. Extended essay/data-response work, the internal assessment, and independent research into current examples remain part of the student's wider course.
+Sources and links are in README.md. These lessons support practice and review alongside classroom teaching. The Assessment studio now adds diagram construction, written-paper exercises, an IA planner and sourced economic evidence. See ASSESSMENT-REVIEW.md for exact scope and remaining gaps. Independent assessment still requires teacher judgement.

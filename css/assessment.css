@@ -1,0 +1,23 @@
+.assessment-nav { margin: 20px 0; }
+.assessment-field { display: grid; gap: 6px; margin: 14px 0; font-weight: 500; min-width: 0; }
+.assessment input:not([type=checkbox]), .assessment textarea, .assessment select {
+ width: 100%; max-width: 100%; min-width: 0; padding: 10px; border: 1px solid var(--line);
+ border-radius: 8px; color: var(--text); background: var(--bg-2); font: inherit;
+}
+.assessment textarea { resize: vertical; min-height: 110px; }
+.assessment select { white-space: normal; }
+.assessment-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
+.assessment-controls > * { flex: 1 1 150px; }
+.review-check { display: flex; gap: 10px; align-items: start; margin: 12px 0; }
+.review-check input { flex: 0 0 auto; width: 20px; height: 20px; margin-top: 3px; }
+.drawing-board { width: 100%; display: block; background: var(--bg-2); border: 1px solid var(--line); cursor: crosshair; touch-action: manipulation; }
+.timer { font: 700 1.5rem 'Space Grotesk',sans-serif; margin: 16px 0; font-variant-numeric: tabular-nums; }
+.assessment .card { overflow-wrap: anywhere; }
+.assessment .row { margin: 12px 0; }
+.assessment th, .assessment td { vertical-align: top; }
+.assessment a, .assessment button { overflow-wrap: anywhere; }
+@media (max-width: 450px) {
+ .assessment-nav .btn { padding: 8px 10px; font-size: .85rem; }
+ .assessment .card { padding: 16px; }
+ .assessment-controls { gap: 8px; }
+}

@@ -137,6 +137,8 @@ const sections = [
  explain:'Explain why a loan, aid grant and foreign investment can each help development, but none guarantees it.'
 }
 ];
+// Append only: keep all published question identifiers stable.
+sections.find(s=>s.id==='4.1').quiz.push(n(hl+'Calculate export revenue at the world price.'+tbl(['Item','Value'],[['Domestic supply (units)','80'],['Domestic demand (units)','30'],['World price (H per unit)','6'],['Exports (units)',A(50)],['Export revenue (H)',A(300,true)]]),300,'Exports = 80 − 30 = 50 units. Export revenue = 50 × H6 = H300. Use exports, not total domestic production.','H'));
 for (const s of sections) s.quiz.forEach((q,i)=>q.id=`${s.id}-${i+1}`);
 export const unit4 = {id:'4',title:'The global economy',emoji:'🌐',blurb:'Take HarbourFest across borders. Follow fictional Harbourland and Coastland through trade, currencies, international accounts and the choices that shape development.',sections,formulas:[
  {group:'4.1 Trade and comparative advantage',items:[{name:'Imports and exports',f:M`\text{imports}=Q_d-Q_s`,note:'At the world price when domestic demand exceeds supply. Exports equal supply minus demand in the opposite case.'},{name:'Opportunity cost',f:M`OC_A=\frac{\text{maximum output of B}}{\text{maximum output of A}}`,hl:true,note:'For a linear PPC using the same resources.'}]},
