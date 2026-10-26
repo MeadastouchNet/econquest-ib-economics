@@ -1,3 +1,6 @@
+import { glossary2 } from './glossary2.js';
+import { glossary4 } from './glossary4.js';
+import { glossary3 } from './glossary3.js';
 export const GLOSSARY = {
   "economics": {
     "sec": "1.1a",
@@ -249,6 +252,8 @@ export const GLOSSARY = {
     "def": "An approach aiming to retain materials in use, reduce waste and regenerate natural systems."
   }
 };
+
+Object.assign(GLOSSARY, glossary2, glossary3, glossary4);
 
 const INDEX = new Map();
 for (const [key, e] of Object.entries(GLOSSARY)) {

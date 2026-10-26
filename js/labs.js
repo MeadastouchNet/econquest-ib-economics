@@ -30,6 +30,40 @@ function challengeList(texts, onWin) {
 }
 
 const LABS = {
+  equilibrium(el, lab, onWin) {
+    const mode = lab.mode || 'market';
+    const labels = mode === 'macro'
+      ? {d:'AD',s:'SRAS',x:'Real GDP (index)',y:'Price level (index)',dShift:'Autonomous spending shift',sShift:'Supply cost shift',rise:'Raise aggregate demand by 20; leave supply unchanged.',supply:'Reset demand, then raise production costs by 20.'}
+      : mode === 'fx'
+      ? {d:'D currency',s:'S currency',x:'Currency traded (million)',y:'Foreign currency per domestic unit (index)',dShift:'Demand for domestic currency',sShift:'Domestic currency supply cost shift',rise:'Raise demand for domestic currency by 20.',supply:'Reset demand, then increase currency supply (cost shift −20).'}
+      : {d:'Demand',s:'Supply',x:'Quantity (cups per day)',y:'Price (DKK per cup)',dShift:'Demand shift',sShift:'Production cost shift',rise:'Raise demand by 20; leave supply unchanged.',supply:'Reset demand, then raise production costs by 20.'};
+    const state = {d:0,s:0};
+    const graph = h('div'), info = h('p',{'aria-live':'polite'});
+    const checks = challengeList([labels.rise,labels.supply],onWin);
+    const update = () => {
+      // P = 100 + d − Q; P = 20 + s + Q. Fixed axes allow shifts to be compared.
+      const quantity = (80 + state.d - state.s)/2;
+      const price = 60 + (state.d + state.s)/2;
+      const points = (d,s) => [
+        {name:labels.d,color:'var(--accent)',points:[[0,100+d],[80,20+d]]},
+        {name:labels.s,color:'var(--good)',points:[[0,20+s],[80,100+s]]}
+      ];
+      graph.replaceChildren(lineChart([
+        {name:'',color:'var(--muted)',dash:'4 4',points:[[0,100],[80,20]]},
+        {name:'',color:'var(--muted)',dash:'4 4',points:[[0,20],[80,100]]},
+        ...points(state.d,state.s),
+        {name:'Equilibrium',color:'var(--warn)',points:[[quantity,price]],dots:true},
+        {name:'',color:'transparent',points:[[0,0],[80,140]]}
+      ],{title:`${labels.d} and ${labels.s}: ${labels.y} against ${labels.x}`,xLabel:labels.x}));
+      info.textContent = `Equilibrium: ${labels.x} = ${quantity}; ${labels.y} = ${price}. Baseline: quantity 40, vertical value 60. Dashed curves show the baseline.`;
+      checks.check([state.d===20&&state.s===0,state.d===0&&state.s===(mode==='fx'?-20:20)]);
+    };
+    el.append(h('h2',{},'🎮 '+lab.title),h('p',{},`Vertical axis: ${labels.y}. Horizontal axis: ${labels.x}. Move a curve and compare both equilibrium values.`),
+      h('p',{class:'muted'},mode==='macro'?'A simplified upward-sloping SRAS model for the short run. It does not represent long-run potential output.':mode==='fx'?'A floating exchange rate model. A negative supply cost shift moves currency supply right.':'A competitive market with linear curves, holding other influences constant.'),checks,
+      slider({label:labels.dShift,min:-20,max:20,step:10,value:0,oninput:v=>{state.d=v;update();}}),
+      slider({label:labels.sShift,min:-20,max:20,step:10,value:0,oninput:v=>{state.s=v;update();}}),graph,info);
+    update();
+  },
   // ------------------------------------------------------------ classify
   sort(el, lab, onWin) {
     const render = () => {

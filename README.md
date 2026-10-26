@@ -1,6 +1,8 @@
 # EconQuest · IB Economics HL
 
-Chapter 1: Introduction to economics. Six short lessons cover syllabus 1.1 and 1.2 using the fictional HarbourFest case, with 48 quiz questions, six labs, worked examples, glossary helpers, read-aloud, spaced review, XP and local usage statistics.
+All four units of IB Economics HL: introduction, microeconomics, macroeconomics and the global economy. Short lessons use the fictional HarbourFest and Harbourland cases, with interactive labs, worked examples, quizzes, glossary helpers, read-aloud, spaced review, XP and local usage statistics.
+
+46 lessons, 336 quiz questions, 49 activities and 300 glossary entries. The remaining chapters add 40 lessons, 288 questions and 43 activities.
 
 Live app: https://meadastouchnet.github.io/econquest-ib-economics/
 
@@ -10,9 +12,9 @@ Run `python -m http.server 8765` in this folder and open http://localhost:8765. 
 
 ## Curriculum and sources
 
-Chapter 1 is shared by SL and HL. Lesson IDs 1.1a–d map to syllabus 1.1, and 1.2a–b to 1.2. The app is a practice companion, not a replacement for the approximately ten teaching hours recommended for Unit 1. Units 2–4 are labelled coming soon; mixed HL content will be marked when those units are built.
+Chapter 1 is shared by SL and HL. Lesson IDs 1.1a–d map to syllabus 1.1, and 1.2a–b to 1.2. Units 2–4 cover every remaining syllabus topic; larger topics are split into short lessons. HL-only topics and extensions are marked. See `docs/SYLLABUS.md` for coverage. The app is a practice companion alongside classroom teaching, current real-world examples and extended exam practice.
 
-Scope checked against the IB Economics guide, first assessment 2022, Unit 1, pages 22–24, and the IB subject brief:
+Scope checked against the IB Economics guide, first assessment 2022, and the IB subject brief:
 - https://www.ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/economics/
 - https://www.ibo.org/globalassets/new-structure/programmes/dp/pdfs/sl-economics-en.pdf
 - Guide copy: https://www.ibdeconomics.com/uploads/1/1/7/5/11758934/new_economics_guide_first_assessment_2022.pdf
@@ -21,7 +23,11 @@ All teaching text and questions are original. Festival data are fictional. This 
 
 ## Structure
 
-`js/content/chapter1.js` holds lessons, questions and formulas. `units.js` registers built and planned units; `glossary.js` holds definitions. `js/labs.js` contains interactive activities. `js/config.js` sets app identity and the separate progress storage key. `docs/ROADMAP.md` tracks coverage and checks.
+`js/content/chapter1.js` and `unit2.js`–`unit4.js` hold lessons, questions and formulas. `units.js` registers units; `glossary.js` combines the glossary files. `js/labs.js` contains interactive activities, including market, AD/SRAS and exchange-rate curve models. `js/config.js` sets app identity and the separate progress storage key. `docs/ROADMAP.md` tracks coverage and checks.
+
+## Verification
+
+Run `node C:/Users/jespe/.codex/skills/ib-learning-app/scripts/validate_content.mjs .` for content structure and term destinations. With the local server running on port 8873, `node scripts/verify-course.cjs` checks lesson routes, all quiz answers, generic lab challenges, curve-shifting challenges, glossary helpers and phone layouts. The browser script requires Playwright and Edge; adjust its local Playwright import for another machine.
 
 ## Engine credit
 

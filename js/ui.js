@@ -84,7 +84,7 @@ export function speakButton(getHtml) {
 
 export function slider({ label, min, max, step = 1, value, fmt = v => v, oninput }) {
   const out = h('b', {}, fmt(value));
-  const input = h('input', { type: 'range', min, max, step, value });
+  const input = h('input', { type: 'range', min, max, step, value, 'aria-label': label });
   input.addEventListener('input', () => { out.textContent = fmt(+input.value); oninput(+input.value); });
   const wrap = h('div', { class: 'slider' }, h('label', {}, h('span', {}, label), out), input);
   wrap.set = v => { input.value = v; out.textContent = fmt(v); };
