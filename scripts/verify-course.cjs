@@ -6,7 +6,7 @@ const fs = require('node:fs');
  const browser = await chromium.launch({headless:true,channel:'msedge'});
  const page = await browser.newPage({viewport:{width:1280,height:900}});
  const errors=[]; page.on('pageerror', e=>errors.push(e.message));
- const base='http://127.0.0.1:8873/';
+ const base=process.env.ECONQUEST_TEST_URL || 'http://127.0.0.1:8873/';
  const go=async hash=>{await page.goto(base+hash);await page.locator('#app h1').waitFor();};
  await go('');
  const sections=await page.evaluate(async()=> (await import('/js/content/units.js')).SECTIONS);

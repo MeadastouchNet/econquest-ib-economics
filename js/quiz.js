@@ -1,3 +1,4 @@
+import { icon } from './icons.js';
 // Quiz engine. Question types:
 //   mcq:  { q, options: [...], answer: index, why }
 //   tf:   { q, answer: true|false, why }
@@ -59,7 +60,7 @@ function setupBlanks(root, onEnter) {
 export function renderQuestion(el, q, { meta = '', onAnswer, done } = {}) {
   el.replaceChildren();
   const fb = h('div');
-  const next = h('button', { class: 'btn hidden', style: 'margin-top:12px' }, 'Next →');
+  const next = h('button', { class: 'btn dark hidden', style: 'margin-top:12px' }, 'Next →');
   let answered = false;
 
   const finish = (ok, extra = '') => {
@@ -94,12 +95,15 @@ export function renderQuestion(el, q, { meta = '', onAnswer, done } = {}) {
       ? [{ label: 'True', val: true }, { label: 'False', val: false }]
       : shuffle(q.options.map((o, i) => ({ label: o, val: i })));
     const wrap = h('div', { class: 'options' });
-    const buttons = opts.map(o => {
-      const b = h('button', { class: 'opt', html: o.label });
+    const buttons = opts.map((o, oi) => {
+      const mark = h('span', { class: 'opt-mark' });
+      const b = h('button', { class: 'opt', 'aria-label': o.label.replace(/<[^>]*>/g, '') },
+        h('span', { class: 'opt-key', 'aria-hidden': 'true' }, String.fromCharCode(65 + oi)),
+        h('span', { class: 'opt-label', html: o.label }), mark);
       b.onclick = () => {
         const ok = o.val === q.answer;
-        buttons.forEach((x, i) => { x.disabled = true; if (opts[i].val === q.answer) x.classList.add('correct'); });
-        if (!ok) b.classList.add('wrong');
+        buttons.forEach((x, i) => { x.disabled = true; if (opts[i].val === q.answer) { x.classList.add('correct'); x.querySelector('.opt-mark').replaceChildren(icon('check')); } });
+        if (!ok) { b.classList.add('wrong'); mark.replaceChildren(icon('x')); }
         finish(ok);
       };
       return b;
@@ -113,7 +117,7 @@ export function renderQuestion(el, q, { meta = '', onAnswer, done } = {}) {
     const input = finalCell ? finalCell.input
       : h('input', { type: 'text', inputmode: 'decimal', placeholder: 'Your answer', 'aria-label': 'Your answer' });
     const check = h('button', { class: 'btn' }, 'Check');
-    const hint = q.hint ? h('button', { class: 'btn ghost small' }, '💡 Hint') : null;
+    const hint = q.hint ? h('button', { class: 'btn ghost small' }, icon('lightbulb'), 'Hint') : null;
     const hintBox = h('div', { class: 'muted small', style: 'margin-top:8px' });
     if (hint) hint.onclick = () => { hintBox.innerHTML = q.hint; hint.remove(); };
     submit = () => {
@@ -194,7 +198,7 @@ export function runQuiz(el, questions, { mode = 'lesson', title = 'Quiz', xpRigh
     if (i >= queue.length) { onFinish && onFinish({ right, total }); return; }
     const item = queue[i];
     progress.firstChild.style.width = `${(i / queue.length) * 100}%`;
-    const meta = item.first ? `${title} · ${i + 1} / ${queue.length}` : `🔁 Second chance`;
+    const meta = item.first ? `${title} · ${i + 1} / ${queue.length}` : `Second chance`;
     renderQuestion(box, item.q, {
       meta,
       onAnswer: ok => {

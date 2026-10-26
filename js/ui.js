@@ -1,3 +1,4 @@
+import { icon } from './icons.js';
 // Small DOM, formatting and SVG chart helpers shared by every view.
 import { speak, stopSpeaking, htmlToSpeech, canSpeak, sfx } from './audio.js';
 import * as store from './store.js';
@@ -40,7 +41,7 @@ export function toast(msg) {
 
 export function confetti(n = 40) {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const colors = ['#7c5cff', '#20d3c2', '#ffbf3c', '#ff5d73', '#2fd47a'];
+  const colors = ['var(--yellow)', 'var(--text)', 'var(--muted)'];
   for (let i = 0; i < n; i++) {
     const c = h('div', { class: 'confetti' });
     c.style.left = Math.random() * 100 + 'vw';
@@ -55,7 +56,7 @@ export function confetti(n = 40) {
 export function reward(xp, msg) {
   const up = store.addXP(xp);
   renderStats();
-  if (up) { sfx('level'); confetti(80); toast(`🎉 Level up! You're now: ${store.levelName()}`); }
+  if (up) { sfx('level'); confetti(80); toast(`Level up! You're now: ${store.levelName()}`); }
   else if (msg) toast(`${msg} +${xp} XP`);
 }
 
@@ -63,9 +64,9 @@ export function renderStats() {
   const el = document.getElementById('stats');
   const s = store.streak();
   el.replaceChildren(
-    h('span', { class: 'pill', title: 'Daily streak' }, `🔥 ${s}`),
-    h('span', { class: 'pill', title: 'Experience points' }, `⭐ ${store.get().xp} XP`),
-    h('span', { class: 'pill hide-sm', title: 'Level' }, `🎓 ${store.levelName()}`)
+    h('span', { class: 'pill', title: 'Daily streak' }, icon('flame'), `${s}`),
+    h('span', { class: 'pill', title: 'Experience points' }, icon('zap'), `${store.get().xp} XP`),
+    h('span', { class: 'pill hide-sm', title: 'Level' }, icon('graduation-cap'), store.levelName())
   );
 }
 
@@ -73,11 +74,11 @@ export function renderStats() {
 export function speakButton(getHtml) {
   if (!canSpeak()) return null;
   let on = false;
-  const b = h('button', { class: 'icon-btn', title: 'Read aloud', 'aria-label': 'Read aloud' }, '🔊');
+  const b = h('button', { class: 'icon-btn', title: 'Read aloud', 'aria-label': 'Read aloud' }, icon('volume-2'));
   b.onclick = () => {
     if (on) { stopSpeaking(); return; }
-    on = true; b.textContent = '⏹';
-    speak(htmlToSpeech(typeof getHtml === 'function' ? getHtml() : getHtml), () => { on = false; b.textContent = '🔊'; });
+    on = true; b.replaceChildren(icon('square')); b.setAttribute('aria-label', 'Stop reading');
+    speak(htmlToSpeech(typeof getHtml === 'function' ? getHtml() : getHtml), () => { on = false; b.replaceChildren(icon('volume-2')); b.setAttribute('aria-label', 'Read aloud'); });
   };
   return b;
 }

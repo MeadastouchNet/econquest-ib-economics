@@ -1,3 +1,4 @@
+import { icon } from './icons.js';
 // Exam-style calculator for quiz questions. Keys are limited to what the current unit needs.
 // Expressions are parsed by a tiny recursive-descent parser (no eval).
 import { h } from './ui.js';
@@ -82,7 +83,7 @@ export function calculator({ keys = BASIC_KEYS, useAnswer } = {}) {
   let last = null;
   const display = h('input', { type: 'text', class: 'calc-display', inputmode: 'none', autocomplete: 'off', 'aria-label': 'Calculator input', placeholder: '0' });
   const result = h('div', { class: 'calc-result', 'aria-live': 'polite' }, ' ');
-  const use = useAnswer ? h('button', { class: 'btn teal small', disabled: true }, '↓ Insert result') : null;
+  const use = useAnswer ? h('button', { class: 'btn ghost small', disabled: true }, icon('arrow-down'), 'Insert result') : null;
 
   const run = () => {
     try {
@@ -116,10 +117,10 @@ export function calculator({ keys = BASIC_KEYS, useAnswer } = {}) {
   const pad = h('div', { class: 'calc-keys' }, keys.flatMap(row => row.map(k =>
     h('button', { type: 'button', class: `calc-key ${/[0-9.]/.test(k) ? '' : k === '=' ? 'eq' : 'op'}`, style: row.length === 1 ? 'grid-column:1 / -1' : null, onclick: () => press(k) }, k))));
   const body = h('div', { class: 'calc-body' }, display, result, pad, use);
-  const toggle = h('button', { type: 'button', class: 'btn ghost small calc-toggle', 'aria-expanded': 'true' }, '🧮 Hide calculator');
+  const toggle = h('button', { type: 'button', class: 'btn ghost small calc-toggle', 'aria-expanded': 'true' }, icon('calculator'), 'Hide calculator');
   toggle.onclick = () => {
     const hidden = body.classList.toggle('hidden');
-    toggle.textContent = hidden ? '🧮 Show calculator' : '🧮 Hide calculator';
+    toggle.replaceChildren(icon('calculator'), hidden ? 'Show calculator' : 'Hide calculator');
     toggle.setAttribute('aria-expanded', String(!hidden));
   };
   return h('div', { class: 'calc' }, toggle, body);

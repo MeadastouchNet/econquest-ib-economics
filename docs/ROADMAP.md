@@ -41,3 +41,11 @@ No planned units or glossary destinations remain. See `SYLLABUS.md` for the mapp
 ## Maintenance
 
 After a week or two, inspect local Usage stats for return visits, older-question accuracy, difficult questions and lesson ratings. Update examples and explanations where needed. Keep published question IDs stable.
+
+## Visual refresh — 26 October 2026
+
+- Applied the skill’s monochrome and yellow palette, typography, Lucide interface icons and component styling.
+- Updated lesson diagrams to follow theme tokens; kept progress keys and quiz IDs unchanged.
+- Full course browser check: 46 lessons, 336 correct answers, 49 rendered labs, glossary, formulas and phone layouts passed.
+- Design check: 286 routes in light/dark at 1280px and 375px, plus automatic/manual themes, yellow-button contrast and quiz marking.
+- Content validation passed with existing question-length and glossary-alias warnings.

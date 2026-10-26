@@ -29,6 +29,12 @@ All teaching text and questions are original. Festival data are fictional. This 
 
 Run `node C:/Users/jespe/.codex/skills/ib-learning-app/scripts/validate_content.mjs .` for content structure and term destinations. With the local server running on port 8873, `node scripts/verify-course.cjs` checks lesson routes, all quiz answers, generic lab challenges, curve-shifting challenges, glossary helpers and phone layouts. The browser script requires Playwright and Edge; adjust its local Playwright import for another machine.
 
+## Visual design
+
+The shared styles follow `ib-learning-app/references/visual-design.md`: black, white and grey surfaces with one yellow accent; Bricolage Grotesque headings, Figtree body text and JetBrains Mono numbers. Lucide icons are inlined in `js/icons.js` (ISC licence). Lesson diagrams use the same theme tokens as interactive charts. Light, dark and automatic themes are supported.
+
+Run `node scripts/verify-design.cjs` for the theme and responsive checks. It starts its own local preview and checks all lesson steps at desktop and 375px widths in both themes. `ECONQUEST_TEST_URL` can override the preview URL used by the full course checker.
+
 ## Engine credit
 
 Adapted from MeadastouchNet/bizquest-ib-business. The shared engine provides quizzes, review scheduling, read-aloud, calculator, progress and usage statistics.
