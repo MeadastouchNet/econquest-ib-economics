@@ -51,6 +51,26 @@ main { padding-top: 16px; padding-bottom: 40px; outline: none; }
 .small { font-size: .875rem; }
 .hidden { display: none !important; }
 
+/* First-visit trailer and the replay page share the same responsive player. */
+.trailer {
+  display: block; width: 100%; aspect-ratio: 16 / 9;
+  max-height: 75dvh; object-fit: contain; background: #000; border-radius: 16px;
+}
+.trailer-intro {
+  width: min(1100px, calc(100vw - 32px)); max-width: none;
+  max-height: calc(100dvh - 32px); padding: 0; border: 0;
+  background: transparent; color: var(--text); overflow: auto;
+}
+.trailer-intro::backdrop { background: rgb(0 0 0 / .82); }
+.trailer-intro .trailer-close { display: block; margin: 0 0 12px auto; background: var(--card); }
+.trailer-wrap { position: relative; }
+.trailer-sound:not([hidden]) {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  white-space: nowrap; box-shadow: 0 4px 24px rgb(0 0 0 / .35);
+}
+.trailer-sound[hidden] { display: none; }
+.trailer-sound:active { transform: translate(-50%, -50%); }
+
 /* top bar */
 .topbar {
   position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between;

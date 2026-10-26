@@ -10,7 +10,7 @@ export const XP_PER_LEVEL = 250;
 
 const fresh = () => ({
   xp: 0, days: {}, sections: {}, cards: {}, explains: {}, ratings: {}, log: [], boss: { byUnit: {} },
-  settings: { autoRead: false, sound: true, rate: 1, voice: '', theme: 'auto' }
+  settings: { autoRead: false, sound: true, rate: 1, voice: '', theme: 'auto', trailerSeen: false }
 });
 
 let state = load();

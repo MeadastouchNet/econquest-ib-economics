@@ -9,6 +9,7 @@ import { typeset, fitFormulas } from './tex.js';
 import { linkTerms } from './terms.js';
 import { APP } from './config.js';
 import { assessmentView, assessmentLinks } from './assessment.js';
+import { trailerIntro, trailerView } from './trailer.js';
 
 const STEPS = [
   { key: 'hook', icon: 'hand', label: 'Hook' },
@@ -49,6 +50,7 @@ function route() {
   else if (view === 'formulas') formulasView(findUnit(a)?.sections ? findUnit(a) : null);
   else if (view === 'stats' || view === 'parent') statsView();
   else if (view === 'settings') settingsView();
+  else if (view === 'trailer') trailerView(app);
   else if (view === 'assessment') assessmentView(app, a, b);
   else homeView();
   renderStats();
@@ -91,10 +93,12 @@ function homeView() {
     h('a', { class: 'btn ghost', href: '#/review' }, icon('rotate-ccw'), `Review (${due} due)`),
     h('a', { class: 'btn ghost', href: '#/boss' }, icon('swords'), 'Boss Battle'),
     h('a', { class: 'btn ghost', href: '#/formulas' }, icon('sigma'), 'Formulas'),
-    h('a', { class: 'btn ghost', href: '#/assessment' }, icon('clipboard-list'), 'Assessment studio'));
+    h('a', { class: 'btn ghost', href: '#/assessment' }, icon('clipboard-list'), 'Assessment studio'),
+    h('a', { class: 'btn ghost', href: '#/trailer' }, icon('play'), 'Trailer'));
 
   const units = h('section', {}, h('h2', {}, 'Units'), h('div', { class: 'grid' }, UNITS.map(unitCard)));
   app.replaceChildren(hero, quick, units);
+  trailerIntro();
 }
 
 function unitCard(u) {

@@ -6,6 +6,8 @@ All four units of IB Economics HL: introduction, microeconomics, macroeconomics 
 
 Live app: https://meadastouchnet.github.io/econquest-ib-economics/
 
+The home page opens the 30-second trailer on a first visit. Closing it (including Escape or the backdrop) remembers dismissal in this browser's local settings. The **Trailer** button always opens the replay page. Browsers that block sound autoplay start muted with a **Tap for sound** button. The 1080p video and poster are in `promo/`.
+
 ## Assessment studio
 
 Open **Assessment studio** from the home page, lesson links or footer: 26 diagram construction tasks (12 comparison models), timed Paper 1/2/HL Paper 3 exercises with 11 checked numerical parts, IA preparation, sourced cases and an initial skills evidence tracker. Written feedback is formative self-review, not automated IB marking. Quiz recall and independent assessment are distinguished. See [the review response](docs/ASSESSMENT-REVIEW.md) for scope, checks and remaining gaps.
