@@ -1,25 +1,16 @@
-# Syllabus: what each built unit covers
+# Economics syllabus mapping
 
-IB Business Management guide, first assessment 2024. Each content point is marked **verified** (checked
-against the official guide) or **from memory** (written from knowledge of the guide; check it when the guide is
-available). Planned units list their topic titles in `js/content/units.js`; those are from memory too.
+Scope checked on 26 October 2026 against the IB Economics guide (first assessment 2022), pages 22–24. All Unit 1 content is common to SL and HL. The original guide, rather than this app, remains authoritative for assessment requirements.
 
-## Unit 1: Introduction to business management (built 2026-10-26)
-
-| Topic | Content points | Status |
+| App lesson | Syllabus | Coverage |
 |---|---|---|
-| 1.1 Introduction to business management | What a business is (combining human, physical and financial resources); the four business functions; primary, secondary, tertiary and quaternary sectors; sectoral change; entrepreneurship; reasons for starting a business; problems a new business may face | from memory |
-| 1.1 | Intrapreneurship | from memory: may not be named in the 2024 guide |
-| 1.2 Types of business entities | Private vs public sector; sole traders; partnerships; privately held companies; publicly held companies; for-profit social enterprises incl. cooperatives; non-profit social enterprises incl. NGOs | from memory |
-| 1.3 Business objectives | Vision and mission statements; common objectives (growth, profit, protecting shareholder value, ethical objectives); strategic and tactical objectives; corporate social responsibility (CSR) | from memory |
-| 1.3 | SMART objectives; reasons why objectives change | from memory: may not be named in the 2024 guide |
-| 1.4 Stakeholders | Internal and external stakeholders; their interests; conflict between stakeholders | from memory |
-| 1.4 | Stakeholder mapping (a toolkit item, taught here) | from memory |
-| 1.5 Growth and evolution | Internal and external economies and diseconomies of scale; reasons to grow and to stay small; internal (organic) growth; external growth: mergers and acquisitions, takeovers, joint ventures, strategic alliances, franchising | from memory |
-| 1.6 Multinational companies (MNCs) | What an MNC is; reasons for becoming an MNC; impact of MNCs on host countries | from memory |
+| 1.1a | 1.1 | Social science; micro/macro; scarcity, choice, opportunity cost, free goods; nine concepts |
+| 1.1b | 1.1 | Factors of production; allocation questions; market, planned and mixed systems |
+| 1.1c | 1.1 | PPC assumptions, cost, unemployment, efficiency and growth; diagram practice |
+| 1.1d | 1.1 | Circular flow; five sectors; real/money flows; leakages and injections |
+| 1.2a | 1.2 | Methodology, logic, evidence, refutation, ceteris paribus; values, equity and equality |
+| 1.2b | 1.2 | Historical economic thought through behavioural economics and circular economy |
 
-HL: all of Unit 1 is treated as SL and HL (no HL-only parts). From memory.
+Units 2–4 are registered by topic title, including HL-only 2.10–2.12, but have no lessons yet. Topics with mixed SL/HL content will need detailed HL tags when built.
 
-## Unit 3: Finance and accounts (built 2026-10-26)
-
-Topics 3.1–3.9 as listed in `js/content/unit3.js`; HL-only parts are tagged there. All from memory.
+Sources and links are in README.md. The six short lessons are designed for practice and review alongside classroom teaching, not to reproduce the guide’s full ten-hour teaching allocation.
