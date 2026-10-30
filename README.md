@@ -31,6 +31,13 @@ All teaching text and questions are original. Festival data are fictional. This 
 
 `js/content/chapter1.js` and `unit2.js`–`unit4.js` hold lessons, questions and formulas. `units.js` registers units; `glossary.js` combines the glossary files. `js/labs.js` contains interactive activities, including market, AD/SRAS and exchange-rate curve models. `js/config.js` sets app identity and the separate progress storage key. `docs/ROADMAP.md` tracks coverage and checks.
 
+## Google sign-in
+
+Signing in with Google is required. Progress is kept in the browser and synced to the user's Firestore document
+(`users/{uid}`) in the Firebase project `ib-economy-hl`, so it follows them to any device. `js/cloud.js` handles
+sign-in and the cloud copy; the web config is in `js/config.js`. The Firestore security rule (set in the Firebase
+console) must allow `users/{uid}` only when `request.auth.uid == uid`.
+
 ## Verification
 
 Run `node C:/Users/jespe/.codex/skills/ib-learning-app/scripts/validate_content.mjs .` for content structure and term destinations. With the local server running on port 8877, `node scripts/verify-course.cjs` checks lesson routes, all quiz answers, generic lab challenges, curve-shifting challenges, glossary helpers and phone layouts. The browser script requires Playwright and Edge; adjust its local Playwright import for another machine.

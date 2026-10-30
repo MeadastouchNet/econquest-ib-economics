@@ -16,10 +16,13 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/assessment.css">
 </head>
-<body>
+<body class="gated">
   <header class="topbar">
     <a href="#/" class="brand"><span class="brand-icon">E</span> EconQuest</a>
-    <div class="stats" id="stats"></div>
+    <div class="top-right">
+      <div class="stats" id="stats"></div>
+      <a href="#/settings" class="account hidden" id="account" aria-label="Account and sync"></a>
+    </div>
   </header>
   <main id="app" class="container" tabindex="-1"></main>
   <footer class="footer container">
